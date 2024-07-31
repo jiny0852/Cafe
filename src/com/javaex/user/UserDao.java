@@ -8,8 +8,6 @@ import java.sql.SQLException;
 
 import com.javaex.admin.AdminUserVo;
 
-
-
 public class UserDao {
 
 	// 0. import java.sql.*;
@@ -65,16 +63,16 @@ public class UserDao {
 
 	//////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////
-	
-	//회원 로그인 조회 -- selectone scan id pw  
+
+	// 회원 로그인 조회 -- selectone scan id pw
 	public AdminUserVo userLogin(String uid, String upw) {
-		
+
 		int count = -1;
-		
+
 		this.getConnection();
-		
+
 		AdminUserVo userVo = null;
-		
+
 		try {
 
 			// 3. SQL문 준비 / 바인딩 / 실행
@@ -98,20 +96,19 @@ public class UserDao {
 			rs = pstmt.executeQuery();
 
 			// 4.결과처리
-						
+
 			while (rs.next()) {
-			
+
 				int userId = rs.getInt("user_id");
 				String id = rs.getString("id");
 				String pw = rs.getString("pw");
 				String name = rs.getString("user_name");
 				String hp = rs.getString("user_name");
-				
+
 				userVo = new AdminUserVo(userId, id, pw, name, hp);
-				
-				
+
 				count++;
-				
+
 			}
 			System.out.println("로그인 되었습니다");
 
@@ -123,14 +120,10 @@ public class UserDao {
 		this.close();
 
 		return userVo;
-		
-		
-	}
-	
 
-	
-	
-	//회원 정보 수정 -- update scan name ph id pw
+	}
+
+	// 회원 정보 수정 -- update scan name ph id pw
 	public int updateUser(String id, String pw, String name, String hp, int userId) {
 		int count = -1;
 
@@ -170,31 +163,52 @@ public class UserDao {
 
 		return count;
 	}
-	
-	
-	//회원 주문 정보 조회 -- selectall by userid 
-	
-	
-	
-	
-	//회원가입 -- user insert
-	
-	
-	//상품 출력 -- drink list selectall
-	
-	
-	//상품 선택 -- receipt insert scan cnt
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	// 회원 주문 정보 조회 -- selectall by userid
+
+	// 회원가입 -- user insert
+
+	public int insertUser(String id, String pw, String userName, String userHp) {
+
+		int count = -1;
+
+		// DB연결 메소드 호출
+		this.getConnection();
+
+		try {
+			// 3. SQL문 준비 / 바인딩 / 실행
+
+			// - sql문 준비
+			String query = "";
+			query += " insert into users ";
+			query += " values(null, ?, ?, ?, ?) ";
+
+			// - 바인딩
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
+			pstmt.setString(3, userName);
+			pstmt.setString(4, userHp);
+
+			// - 실행
+			count = pstmt.executeUpdate();
+
+			// 4.결과처리
+			System.out.println(count + "건 등록 되었습니다.");
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+
+		this.close();
+
+		return count;
+	}
+
+	// 상품 출력 -- drink list selectall
+
+	// 상품 선택 -- receipt insert scan cnt
+
 	///////////////////////////////////////////////
 	////////////////// 조회수정삭제등록//////////////////
 
