@@ -30,7 +30,10 @@ public class AdminVo {
 	//private int receiptId;
 	//private int drinkId;
 	//private int userId;
-	private int drink_cut;
+	private int drinkCnt;
+	
+	
+	private int totalPrice;
 
 	
 	//  필드   ///////////////////////////////////////
@@ -38,10 +41,12 @@ public class AdminVo {
 	///////  생성자
 	
 	public AdminVo() {
+		super();
 	}
+	
 	public AdminVo(int userId, String id, int pw, String userName, String userHp, int drinkId, String drinkName,
 			String drinkContent, int drinkPrice, int receiptId, String receiptDate, String receiptFinish,
-			String receiptState, int userOrderId, int drink_cut) {
+			String receiptState, int userOrderId, int drinkCut) {
 		super();
 		this.userId = userId;
 		this.id = id;
@@ -57,7 +62,7 @@ public class AdminVo {
 		this.receiptFinish = receiptFinish;
 		this.receiptState = receiptState;
 		this.userOrderId = userOrderId;
-		this.drink_cut = drink_cut;
+		this.drinkCnt = drinkCnt;
 	}
 	
 	//  생성자   ///////////////////////////////////////
@@ -149,11 +154,11 @@ public class AdminVo {
 	public void setUserOrderId(int userOrderId) {
 		this.userOrderId = userOrderId;
 	}
-	public int getDrink_cut() {
-		return drink_cut;
+	public int getDrinkCnt() {
+		return drinkCnt;
 	}
-	public void setDrink_cut(int drink_cut) {
-		this.drink_cut = drink_cut;
+	public void setDrinkCnt(int drinkCnt) {
+		this.drinkCnt = drinkCnt;
 	}
 
 	
@@ -169,7 +174,7 @@ public class AdminVo {
 				+ userHp + ", drinkId=" + drinkId + ", drinkName=" + drinkName + ", drinkContent=" + drinkContent
 				+ ", drinkPrice=" + drinkPrice + ", receiptId=" + receiptId + ", receiptDate=" + receiptDate
 				+ ", receiptFinish=" + receiptFinish + ", receiptState=" + receiptState + ", userOrderId=" + userOrderId
-				+ ", drink_cut=" + drink_cut + "]";
+				+ ", drink_cut=" + drinkCnt + "]";
 	}
 	
 	
