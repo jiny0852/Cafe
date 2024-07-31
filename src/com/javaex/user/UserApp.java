@@ -1,5 +1,7 @@
 package com.javaex.user;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -8,13 +10,16 @@ public class UserApp {
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
-		
+		List<UserVo> foodList = new ArrayList<UserVo>();
 		UserDao userDao = new UserDao();
 
 		boolean on = true; // 목록 while문
 		boolean on2 = true; // 로그인 while문
 		boolean on3 = true; // 로그인성공시 while문
 		boolean on4 = true; // 회원가입 while문
+		boolean stop = true; // 임시 while문(주문받기)
+		
+		int loginNo = 0; // 로그인된 번호(입력받을번호)
 
 		while (on) {
 			// 디폴트 화면 (목록)
@@ -39,8 +44,14 @@ public class UserApp {
 					System.out.print("비밀번호를 입력해주세요:");
 					String pw = sc.nextLine();
 					
-					
 					userVo = userDao.userLogin(id, pw);
+					if ( userVo == null ) {
+						System.out.println("아이디와 비번을 확인해주세요");
+						break;
+					} else {
+						loginNo = userVo.getUserId();
+						
+					}
 					
 					System.out.println("============= 로그인성공 ===============");
 
